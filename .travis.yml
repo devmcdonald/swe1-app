@@ -1,8 +1,5 @@
 language: python
 
-#python:
-#  - 3.11.8
-
 install:
   - cd mysite
   - pip install -r requirements.txt
@@ -14,7 +11,7 @@ before_script:
 script:
   - black --check .
   - flake8 .
-  - coverage run --source=mysite_swe1_app,polls manage.py test
+  - coverage run --source=mysite,polls manage.py test
 
 after_script:
   - coveralls
