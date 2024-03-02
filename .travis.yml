@@ -10,7 +10,7 @@ before_script:
 script:
   - black --check .
   - flake8 .
-  - coverage run -m --source=mysite,polls manage.py test
+  - coverage run --source=mysite,polls manage.py test -m
   - coverage report
 
 after_script:
