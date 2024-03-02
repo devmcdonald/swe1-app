@@ -15,3 +15,14 @@ script:
 
 after_script:
   - coveralls
+
+deploy:
+  provider: elasticbeanstalk
+  access_key_id:
+    secure: key
+  secret_access_key:
+    secure: secretkey
+  region: "us-east-1"
+  app: "mysite"
+  env: "django-env"
+  bucket_name: "elasticbeanstalk-us-east-1-891377044770"
