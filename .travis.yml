@@ -2,6 +2,7 @@ language: python
 install:
 - cd mysite
 - pip install -r requirements.txt
+- pip install --upgrade awscli
 before_script:
 - python manage.py migrate
 script:
