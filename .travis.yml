@@ -26,4 +26,4 @@ deploy:
   region: us-east-1
   app: mysite
   env: django-env
-  bucket_name: elasticbeanstalk-us-east-1-891377044770
+  #bucket_name: elasticbeanstalk-us-east-1-891377044770
