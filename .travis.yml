@@ -1,28 +1,29 @@
 language: python
 
+env:
+  global:
+  - secure: X8TWOu6Xy/RowaTuj4YD0qb/aHcdAS6Dm54d+R6gxlCPpw3KY7dcay9+YrW4DZqIdRQB5yQEWQIETzwhD9uvXuoIH48+cprnEq6T9l66/463CnotJZ5t53YDi4qcHOiaJBbZOcs2U24FIG8SynCwXYCZ/FyDxz7VPh5PII5PBXDIrSXU/l0DHhbO4Ng+CAchLNRFEC92S/5aN5vpb+7AsnpEvptb2DruzoHjtbR0++DLgFE4b1FnmVzw/njUXmIGimRYUtzOlrL3SPRki+/Q4I7Uvp/1RVcI4++RcEZhckcKwtFjU0VRqAGzoJcYduqWFgGN/o7tZkt7DflpVrDYVCBmsVeb61BI4IdEwsuLfQvwohc51AlEJFW7egf+r0DT7np2r9UztqD8mH5YNOs2cs7xyhqJR6WsWd/7B6P915N1TJiDvUTCbdotU1sZKtxv8xDwnMbRdFmDG+0YrEgW8VGWJolhtEduEgP0W3itlaG16uEn7rFletcgdCfy81KlufzDoIJCBZkYrG9OXzKWL/4fm9UCcujPwW5IP+jtkoheOX6PtIMptOcjpI7a/blnUo3eBaQyJQYLh4gm1TehPH/8p6u5vjXVkj/dnSaCNgvsgh1LlGEMwvmgee8XNupkS4hMwNp/Fi3wqKh/v1LH0XGWBAGsgh2jNyr1U4715e0=
+  - secure: xaUiLHYg2+tA3RbIIe3mPC761oe6zczZheK0SHWD7Z9VC6RsNcgZl4WxGIDRnB+gs1+CIKZvRlWwf9UU38RfRsGmJSGiEbPJQ4z3ZBLFzRk7aZzHiLfc34A/WmGlrv9xPE7M4QSIyhC0xVK3ZHIqAEjWJBJsGvXgiUTJNI3PK4/zdFHmHUOc1OFvhvvIFe83nwlULkPjLM3lk2HmfHqS7Mn0tJX9YZbg4y/E36PoITUPFZwvNImwHMby2E0YLTPMvOqQqIiYXQrjFkdUKkcy6LVaz7jLcF99bXYx7ApVuldpVwUqOL0kCuWkcde+W4QUW7KYbDGRN1hdz6nid/QOJ0uhxV5OzgowJERC1nW+Vp/4Qni7Up6Dsz7oIIP7kLadTOPy7otULa+6usCBrxw0gZHM9gmAamYg6ktd3BqYxvD1HUo7ckCTPoqxvWIDlAYsBTk3kgo0Vtt5n4dvLBrPJSPzHcjHlcAp7s4qgPMJmFnYH+M5yBjukE32xuLsa+Q8RxI0gK9HNKp9sKLMiwamnXyn4iN+xlLSE4lx0fFUsvd0Z1grXvUi9GuGCBBWRfenLLiAnkvLu/7wmfisYue3aPN/+4a/hXmuuQ60/J3C2yUtC/hLbzYO1xGAFyagbmWySmo2tdIJSwqQXSiQCbvUJjYsQw+wb0sh+p54hP8eER8=
+
 install:
-  - cd mysite
-  - pip install -r requirements.txt
-
+- cd mysite
+- pip install -r requirements.txt
 before_script:
-  - python manage.py migrate
-
+- python manage.py migrate
 script:
-  - black --check .
-  - flake8 .
-  - coverage run --source=mysite,polls manage.py test
-  - coverage report
-
+- black --check .
+- flake8 .
+- coverage run --source=mysite,polls manage.py test
+- coverage report
 after_script:
-  - coveralls
-
+- coveralls
 deploy:
   provider: elasticbeanstalk
   access_key_id:
-    secure: AWS_KEY
+    secure: X8TWOu6Xy/RowaTuj4YD0qb/aHcdAS6Dm54d+R6gxlCPpw3KY7dcay9+YrW4DZqIdRQB5yQEWQIETzwhD9uvXuoIH48+cprnEq6T9l66/463CnotJZ5t53YDi4qcHOiaJBbZOcs2U24FIG8SynCwXYCZ/FyDxz7VPh5PII5PBXDIrSXU/l0DHhbO4Ng+CAchLNRFEC92S/5aN5vpb+7AsnpEvptb2DruzoHjtbR0++DLgFE4b1FnmVzw/njUXmIGimRYUtzOlrL3SPRki+/Q4I7Uvp/1RVcI4++RcEZhckcKwtFjU0VRqAGzoJcYduqWFgGN/o7tZkt7DflpVrDYVCBmsVeb61BI4IdEwsuLfQvwohc51AlEJFW7egf+r0DT7np2r9UztqD8mH5YNOs2cs7xyhqJR6WsWd/7B6P915N1TJiDvUTCbdotU1sZKtxv8xDwnMbRdFmDG+0YrEgW8VGWJolhtEduEgP0W3itlaG16uEn7rFletcgdCfy81KlufzDoIJCBZkYrG9OXzKWL/4fm9UCcujPwW5IP+jtkoheOX6PtIMptOcjpI7a/blnUo3eBaQyJQYLh4gm1TehPH/8p6u5vjXVkj/dnSaCNgvsgh1LlGEMwvmgee8XNupkS4hMwNp/Fi3wqKh/v1LH0XGWBAGsgh2jNyr1U4715e0=
   secret_access_key:
-    secure: AWS_SECRET_KEY
-  region: "us-east-1"
-  app: "mysite"
-  env: "django-env"
-  bucket_name: "elasticbeanstalk-us-east-1-891377044770"
+    secure: xaUiLHYg2+tA3RbIIe3mPC761oe6zczZheK0SHWD7Z9VC6RsNcgZl4WxGIDRnB+gs1+CIKZvRlWwf9UU38RfRsGmJSGiEbPJQ4z3ZBLFzRk7aZzHiLfc34A/WmGlrv9xPE7M4QSIyhC0xVK3ZHIqAEjWJBJsGvXgiUTJNI3PK4/zdFHmHUOc1OFvhvvIFe83nwlULkPjLM3lk2HmfHqS7Mn0tJX9YZbg4y/E36PoITUPFZwvNImwHMby2E0YLTPMvOqQqIiYXQrjFkdUKkcy6LVaz7jLcF99bXYx7ApVuldpVwUqOL0kCuWkcde+W4QUW7KYbDGRN1hdz6nid/QOJ0uhxV5OzgowJERC1nW+Vp/4Qni7Up6Dsz7oIIP7kLadTOPy7otULa+6usCBrxw0gZHM9gmAamYg6ktd3BqYxvD1HUo7ckCTPoqxvWIDlAYsBTk3kgo0Vtt5n4dvLBrPJSPzHcjHlcAp7s4qgPMJmFnYH+M5yBjukE32xuLsa+Q8RxI0gK9HNKp9sKLMiwamnXyn4iN+xlLSE4lx0fFUsvd0Z1grXvUi9GuGCBBWRfenLLiAnkvLu/7wmfisYue3aPN/+4a/hXmuuQ60/J3C2yUtC/hLbzYO1xGAFyagbmWySmo2tdIJSwqQXSiQCbvUJjYsQw+wb0sh+p54hP8eER8=
+  region: us-east-1
+  app: mysite
+  env: django-env
+  bucket_name: elasticbeanstalk-us-east-1-891377044770
