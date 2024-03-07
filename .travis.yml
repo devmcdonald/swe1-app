@@ -1,5 +1,7 @@
 language: python
-
+env:
+  global:
+    TEST=$TEST
 install:
 - cd mysite
 - pip install -r requirements.txt
