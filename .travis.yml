@@ -9,7 +9,7 @@ install:
 before_script:
 - python manage.py migrate
 script:
-- echo TEST
+- echo $TEST
 - black --check .
 - flake8 .
 - coverage run --source=mysite,polls manage.py test
